@@ -1,173 +1,248 @@
-# Walmart Sales Data Analysis
+# 🛒 Walmart Sales Data Analysis using SQL
 
-## About
+## 📌 Project Overview
 
-This project aims to explore the Walmart Sales data to understand top performing branches and products, sales trend of of different products, customer behaviour. The aims is to study how sales strategies can be improved and optimized. The dataset was obtained from the [Kaggle Walmart Sales Forecasting Competition](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting).
+This project analyzes Walmart sales transaction data to uncover business insights related to product performance, customer behavior, branch efficiency, and revenue trends using SQL.
 
-"In this recruiting competition, job-seekers are provided with historical sales data for 45 Walmart stores located in different regions. Each store contains many departments, and participants must project the sales for each department in each store. To add to the challenge, selected holiday markdown events are included in the dataset. These markdowns are known to affect sales, but it is challenging to predict which departments are affected and the extent of the impact." [source](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting)
+The objective is to simulate a real-world retail business analysis scenario where raw transactional data is transformed into actionable business insights through data cleaning, feature engineering, and exploratory data analysis.
 
-## Purposes Of The Project
+This project demonstrates practical SQL skills required for Data Analyst roles, including:
 
-The major aim of thie project is to gain insight into the sales data of Walmart to understand the different factors that affect sales of the different branches.
+* Database design
+* Data cleaning
+* Feature engineering
+* Exploratory Data Analysis (EDA)
+* Business query solving
+* Revenue and profitability analysis
 
-## About Data
+---
 
-The dataset was obtained from the [Kaggle Walmart Sales Forecasting Competition](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting). This dataset contains sales transactions from a three different branches of Walmart, respectively located in Mandalay, Yangon and Naypyitaw. The data contains 17 columns and 1000 rows:
+## 🎯 Business Problem
 
-| Column                  | Description                             | Data Type      |
-| :---------------------- | :-------------------------------------- | :------------- |
-| invoice_id              | Invoice of the sales made               | VARCHAR(30)    |
-| branch                  | Branch at which sales were made         | VARCHAR(5)     |
-| city                    | The location of the branch              | VARCHAR(30)    |
-| customer_type           | The type of the customer                | VARCHAR(30)    |
-| gender                  | Gender of the customer making purchase  | VARCHAR(10)    |
-| product_line            | Product line of the product solf        | VARCHAR(100)   |
-| unit_price              | The price of each product               | DECIMAL(10, 2) |
-| quantity                | The amount of the product sold          | INT            |
-| VAT                     | The amount of tax on the purchase       | FLOAT(6, 4)    |
-| total                   | The total cost of the purchase          | DECIMAL(10, 2) |
-| date                    | The date on which the purchase was made | DATE           |
-| time                    | The time at which the purchase was made | TIMESTAMP      |
-| payment_method          | The total amount paid                   | DECIMAL(10, 2) |
-| cogs                    | Cost Of Goods sold                      | DECIMAL(10, 2) |
-| gross_margin_percentage | Gross margin percentage                 | FLOAT(11, 9)   |
-| gross_income            | Gross Income                            | DECIMAL(10, 2) |
-| rating                  | Rating                                  | FLOAT(2, 1)    |
+Retail businesses generate large volumes of transactional data daily.
+The challenge is converting raw sales records into meaningful insights that answer critical business questions such as:
 
-### Analysis List
+* Which branch performs best?
+* Which products generate the highest revenue?
+* What customer segment contributes most to sales?
+* Which payment methods dominate?
+* When do customers purchase the most?
 
-1. Product Analysis
+This analysis helps understand operational efficiency and customer purchase patterns.
 
-> Conduct analysis on the data to understand the different product lines, the products lines performing best and the product lines that need to be improved.
+---
 
-2. Sales Analysis
+## 🛠️ Tools & Technologies Used
 
-> This analysis aims to answer the question of the sales trends of product. The result of this can help use measure the effectiveness of each sales strategy the business applies and what modificatoins are needed to gain more sales.
+* SQL (MySQL)
+* MySQL Workbench
+* GitHub
+* Kaggle Dataset
 
-3. Customer Analysis
+---
 
-> This analysis aims to uncover the different customers segments, purchase trends and the profitability of each customer segment.
+## 📂 Dataset Information
 
-## Approach Used
+Dataset source: Kaggle Walmart Sales Dataset
 
-1. **Data Wrangling:** This is the first step where inspection of data is done to make sure **NULL** values and missing values are detected and data replacement methods are used to replace, missing or **NULL** values.
+The dataset contains:
 
-> 1. Build a database
-> 2. Create table and insert the data.
-> 3. Select columns with null values in them. There are no null values in our database as in creating the tables, we set **NOT NULL** for each field, hence null values are filtered out.
+* 1000 sales records
+* 3 Walmart branches
+* 3 cities
+* 17 columns
 
-2. **Feature Engineering:** This will help use generate some new columns from existing ones.
+### Main Features
 
-> 1. Add a new column named `time_of_day` to give insight of sales in the Morning, Afternoon and Evening. This will help answer the question on which part of the day most sales are made.
+| Column         | Description                   |
+| -------------- | ----------------------------- |
+| invoice_id     | Unique transaction identifier |
+| branch         | Branch code                   |
+| city           | Branch city                   |
+| customer_type  | Member / Normal customer      |
+| gender         | Customer gender               |
+| product_line   | Product category              |
+| unit_price     | Price per unit                |
+| quantity       | Quantity sold                 |
+| VAT            | Value Added Tax               |
+| total          | Total transaction value       |
+| date           | Transaction date              |
+| time           | Transaction time              |
+| payment_method | Payment mode                  |
+| cogs           | Cost of goods sold            |
+| gross_income   | Profit generated              |
+| rating         | Customer rating               |
 
-> 2. Add a new column named `day_name` that contains the extracted days of the week on which the given transaction took place (Mon, Tue, Wed, Thur, Fri). This will help answer the question on which week of the day each branch is busiest.
+---
 
-> 3. Add a new column named `month_name` that contains the extracted months of the year on which the given transaction took place (Jan, Feb, Mar). Help determine which month of the year has the most sales and profit.
+## ⚙️ Project Workflow
 
-2. **Exploratory Data Analysis (EDA):** Exploratory data analysis is done to answer the listed questions and aims of this project.
+### 1️⃣ Database Creation
 
-3. **Conclusion:**
+* Created relational database schema
+* Defined proper data types
+* Applied primary key constraints
+* Ensured non-null integrity
 
-## Business Questions To Answer
+### 2️⃣ Feature Engineering
 
-### Generic Question
+Generated additional analytical columns:
 
-1. How many unique cities does the data have?
-2. In which city is each branch?
+* `Time_Of_Day`
+* `Day_Name`
+* `Month_Name`
 
-### Product
+These columns helped identify:
 
-1. How many unique product lines does the data have?
-2. What is the most common payment method?
-3. What is the most selling product line?
-4. What is the total revenue by month?
-5. What month had the largest COGS?
-6. What product line had the largest revenue?
-5. What is the city with the largest revenue?
-6. What product line had the largest VAT?
-7. Fetch each product line and add a column to those product line showing "Good", "Bad". Good if its greater than average sales
-8. Which branch sold more products than average product sold?
-9. What is the most common product line by gender?
-12. What is the average rating of each product line?
+* Peak shopping hours
+* Best performing weekdays
+* Monthly revenue trends
 
-### Sales
+### 3️⃣ Exploratory Data Analysis (EDA)
 
-1. Number of sales made in each time of the day per weekday
-2. Which of the customer types brings the most revenue?
-3. Which city has the largest tax percent/ VAT (**Value Added Tax**)?
-4. Which customer type pays the most in VAT?
+Business-driven SQL queries were used to extract insights from the sales data.
 
-### Customer
+---
 
-1. How many unique customer types does the data have?
-2. How many unique payment methods does the data have?
-3. What is the most common customer type?
-4. Which customer type buys the most?
-5. What is the gender of most of the customers?
-6. What is the gender distribution per branch?
-7. Which time of the day do customers give most ratings?
-8. Which time of the day do customers give most ratings per branch?
-9. Which day fo the week has the best avg ratings?
-10. Which day of the week has the best average ratings per branch?
+## 📊 Key Business Questions Solved
 
+### Product Analysis
 
-## Revenue And Profit Calculations
+* Number of unique product lines
+* Most selling product line
+* Highest revenue generating product line
+* Product line with highest VAT contribution
+* Average product ratings
 
-$ COGS = unitsPrice * quantity $
+### Sales Analysis
 
-$ VAT = 5\% * COGS $
+* Revenue by month
+* Highest COGS month
+* Best revenue generating city
+* Branch selling above average quantity
+* Sales trend by time of day
 
-$VAT$ is added to the $COGS$ and this is what is billed to the customer.
+### Customer Analysis
 
-$ total(gross_sales) = VAT + COGS $
+* Most common customer type
+* Gender distribution
+* Preferred payment method
+* Rating trends by branch
+* Best rated weekday
 
-$ grossProfit(grossIncome) = total(gross_sales) - COGS $
+---
 
-**Gross Margin** is gross profit expressed in percentage of the total(gross profit/revenue)
+## 📈 Key Insights Generated
 
-$ \text{Gross Margin} = \frac{\text{gross income}}{\text{total revenue}} $
+* Certain product lines consistently generate higher revenue.
+* Customer buying behavior changes significantly by time of day.
+* Member customers contribute more revenue than normal customers.
+* Some branches outperform others in both volume and ratings.
+* Payment preferences reveal dominant customer transaction habits.
 
-<u>**Example with the first row in our DB:**</u>
+---
 
-**Data given:**
+## 💡 Sample SQL Queries
 
-- $ \text{Unite Price} = 45.79 $
-- $ \text{Quantity} = 7 $
-
-$ COGS = 45.79 * 7 = 320.53 $
-
-$ \text{VAT} = 5\% * COGS\\= 5\%  320.53 = 16.0265 $
-
-$ total = VAT + COGS\\= 16.0265 + 320.53 = $336.5565$
-
-$ \text{Gross Margin Percentage} = \frac{\text{gross income}}{\text{total revenue}}\\=\frac{16.0265}{336.5565} = 0.047619\\\approx 4.7619\% $
-
-## Code
-
-For the rest of the code, check the [SQL_queries.sql](https://github.com/Princekrampah/WalmartSalesAnalysis/blob/master/SQL_queries.sql) file
+### Feature Engineering Example
 
 ```sql
--- Create database
-CREATE DATABASE IF NOT EXISTS walmartSales;
-
--- Create table
-CREATE TABLE IF NOT EXISTS sales(
-	invoice_id VARCHAR(30) NOT NULL PRIMARY KEY,
-    branch VARCHAR(5) NOT NULL,
-    city VARCHAR(30) NOT NULL,
-    customer_type VARCHAR(30) NOT NULL,
-    gender VARCHAR(30) NOT NULL,
-    product_line VARCHAR(100) NOT NULL,
-    unit_price DECIMAL(10,2) NOT NULL,
-    quantity INT NOT NULL,
-    tax_pct FLOAT(6,4) NOT NULL,
-    total DECIMAL(12, 4) NOT NULL,
-    date DATETIME NOT NULL,
-    time TIME NOT NULL,
-    payment VARCHAR(15) NOT NULL,
-    cogs DECIMAL(10,2) NOT NULL,
-    gross_margin_pct FLOAT(11,9),
-    gross_income DECIMAL(12, 4),
-    rating FLOAT(2, 1)
+UPDATE sales
+SET Time_Of_Day = (
+    CASE
+        WHEN time BETWEEN '00:00:00' AND '12:00:00' THEN 'MORNING'
+        WHEN time BETWEEN '12:01:00' AND '16:00:00' THEN 'AFTERNOON'
+        ELSE 'EVENING'
+    END
 );
 ```
+
+### Revenue Analysis Example
+
+```sql
+SELECT Month_Name, SUM(total) AS Total_Revenue
+FROM sales
+GROUP BY Month_Name
+ORDER BY Total_Revenue DESC;
+```
+
+### Customer Revenue Analysis
+
+```sql
+SELECT customer_type, SUM(total) AS Total_Revenue
+FROM sales
+GROUP BY customer_type
+ORDER BY Total_Revenue DESC;
+```
+
+---
+
+## 📐 Revenue Logic Used
+
+### Cost of Goods Sold
+
+`COGS = Unit Price × Quantity`
+
+### VAT
+
+`VAT = 5% × COGS`
+
+### Total Revenue
+
+`Total = COGS + VAT`
+
+### Gross Profit
+
+`Gross Income = Total - COGS`
+
+### Gross Margin %
+
+`Gross Margin = Gross Income / Total Revenue`
+
+---
+
+## 🚀 Why This Project Matters
+
+This project demonstrates the ability to:
+
+* Think like a business analyst
+* Write analytical SQL queries
+* Derive insights from raw transactional data
+* Present findings professionally
+
+This is directly relevant for:
+
+* Data Analyst Internships
+* SQL Analyst Roles
+* Business Intelligence Entry-Level Positions
+
+---
+
+## 📌 Repository Structure
+
+```text
+├── Walmart_Sales_SQL.sql
+├── README.md
+├── dataset.csv
+```
+
+---
+
+## 🔗 Future Improvements
+
+* Build Power BI dashboard using same dataset
+* Add SQL window functions
+* Create KPI dashboard
+* Extend analysis using Python
+
+---
+
+## 👨‍💻 Author
+
+**S Harikesh**
+
+Aspiring Data Analyst | SQL | Python | Power BI | Data Storytelling
+
+---
+
+## ⭐ If you found this project useful, consider starring the repository.
